@@ -12,13 +12,13 @@
 		<plcf:tabela tituloChave="fornecedorsel.titulo" rendered="#{not empty plcLogicaItens.itensPlc}">
 				<plcf:linha styleClass="ui-widget-header">
 					<plcf:celula styleClass="cabecalho">
+						<plcf:titulo titulo="Nome / Razão Social"/>
+					</plcf:celula>
+					<plcf:celula styleClass="cabecalho">
 						<plcf:titulo tituloChave="label.tipoFavorecido"/>
 					</plcf:celula>
 					<plcf:celula styleClass="cabecalho">
 						<plcf:titulo tituloChave="label.telefoneContato"/>
-					</plcf:celula>
-					<plcf:celula styleClass="cabecalho">
-						<plcf:titulo titulo="Nome / Razão Social"/>
 					</plcf:celula>
 					<plcf:celula styleClass="cabecalho">
 						<plcf:titulo tituloChave="label.status"/>
@@ -27,14 +27,14 @@
 				<plcf:iteracao id="plcLogicaItens" value="#{plcLogicaItens.itensPlc}">
 					<plcf:linhaSelecao id="linhaSel" action="fornecedorman" linkEdicao="#{item.linkEdicaoPlc}" propAgregada="fornecedor">
 						<plcf:celula styleClass="campo">
+							<plcf:exibe value="#{item.nome}" rendered="#{item.tipoPessoa != 'J'}"/>
+							<plcf:exibe value="#{item.nomeFantasia}" rendered="#{item.tipoPessoa == 'J'}"/>
+						</plcf:celula>
+						<plcf:celula styleClass="campo">
 							<plcf:exibe value="#{item.tipoPessoa.descricao}" />
 						</plcf:celula>
 						<plcf:celula styleClass="campo">
 							<plcf:exibe value="#{item.telefoneContato}"/>
-						</plcf:celula>
-						<plcf:celula styleClass="campo">
-							<plcf:exibe value="#{item.nome}" rendered="#{item.tipoPessoa != 'J'}"/>
-							<plcf:exibe value="#{item.razaoSocial}" rendered="#{item.tipoPessoa == 'J'}"/>
 						</plcf:celula>
 						<plcf:celula styleClass="campo">
 							<plcf:exibe value="#{item.status.descricao}"/>

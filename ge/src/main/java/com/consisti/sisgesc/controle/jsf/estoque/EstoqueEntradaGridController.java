@@ -6,9 +6,13 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.consisti.sisgesc.dominio.TipoMovimentacao;
 import com.powerlogic.jcompany.comuns.PlcArgVO;
+import com.powerlogic.jcompany.comuns.PlcConstantesComuns;
 import com.powerlogic.jcompany.comuns.PlcException;
 import com.powerlogic.jcompany.comuns.PlcRuntimeException;
+import com.powerlogic.jcompany.config.comuns.colaboracao.PlcConfigArgumentoDetalhe.Formato;
+import com.powerlogic.jcompany.config.comuns.colaboracao.PlcConfigArgumentoDetalhe.Operador;
 import com.powerlogic.jcompany.config.controle.colaboracao.PlcConfigGrupoControle;
 import com.powerlogic.jcompany.config.controle.colaboracao.PlcConfigSelecao;
 import com.powerlogic.jcompany.controle.rest.api.qualifiers.QPlcAtual;
@@ -42,6 +46,14 @@ public class EstoqueEntradaGridController extends PlcBaseGridControle {
 			
 			//montagem do parâmetros da pesquisa...
 			List<PlcArgVO> plcArgsVO = montaListaParametrosDoRequest(request, classeEntidade, configSelecao);
+			
+			PlcArgVO arg = new PlcArgVO();
+			arg.setNome("tipoMovimentacao");
+			arg.setValor(TipoMovimentacao.E.name());
+			arg.setTipo(Formato.STRING.name());
+			arg.setOperador(Operador.IGUAL_A.toString());
+			arg.setTipo(PlcConstantesComuns.CONSULTA.QBE.QBE_TIPO_ARGUMENTO);
+			plcArgsVO.add(arg);
 			
 			total = recuperaTotal(facade, context, classeEntidade, plcArgsVO);
 			

@@ -15,7 +15,19 @@
 					<plcf:titulo tituloChave="label.produtoMaterial">Produto Material</plcf:titulo> 
 				</plcf:celula>  
 				<plcf:celula header="true" styleClass="cabecalho"> 
+					<plcf:titulo tituloChave="label.fornecedor">Produto Material</plcf:titulo> 
+				</plcf:celula>  
+				<plcf:celula header="true" styleClass="cabecalho"> 
 					<plcf:titulo tituloChave="label.status.ativo.inativo">Status</plcf:titulo> 
+				</plcf:celula>  
+				<plcf:celula header="true" styleClass="cabecalho"> 
+					<plcf:titulo tituloChave="label.tipoMovimentacao">Status</plcf:titulo> 
+				</plcf:celula>  
+				<plcf:celula header="true" styleClass="cabecalho"> 
+					<plcf:titulo tituloChave="label.qtdeEntrada">Status</plcf:titulo> 
+				</plcf:celula>  
+				<plcf:celula header="true" styleClass="cabecalho"> 
+					<plcf:titulo tituloChave="label.qtdeSaida">Status</plcf:titulo> 
 				</plcf:celula>  
 				<plcf:celula header="true" styleClass="cabecalho"> 
 					<plcf:titulo tituloChave="label.saldo.produto">Data Criacao</plcf:titulo> 
@@ -30,8 +42,25 @@
 						<plcf:exibe value="#{item.produtoMaterial}"/>
 					</plcf:celula>  
 					<plcf:celula styleClass="campo"> 
+						<plcf:exibe value="#{item.nomeFornecedor}"/>
+					</plcf:celula>  
+					<plcf:celula styleClass="campo"> 
 						<plcf:exibe value="#{item.status.descricao}"/>
 					</plcf:celula>  
+					
+					<plcf:celula styleClass="campo"> 
+						<plcf:exibe value="#{item.tipoMovimentacao.descricao}"/>
+					</plcf:celula>  
+					
+					<plcf:celula styleClass="campo"> 
+						<plcf:exibe value="#{item.qtdeEntrada}"/>
+					</plcf:celula>  
+					
+					<plcf:celula styleClass="campo"> 
+						<plcf:exibe value="#{item.qtdeSaida}"/>
+					</plcf:celula>  
+					
+					
 					<plcf:celula styleClass="campo"> 
 						<plcf:exibe value="#{item.saldo} unidades"/>
 					</plcf:celula> 

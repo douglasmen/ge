@@ -94,11 +94,6 @@
 					<plcf:vinculado obrigatorio="S" id="fornecedor"  modal="S"    value="#{plcEntidade.fornecedor}"              propSelPop="fornecedor"      idExibe="N" idSomenteLeitura="N" autoRecuperacaoClasse="com.consisti.sisgesc.entidade.FornecedorEntity"              actionSel="fornecedorsel"      ajudaChave="ajuda.fornecedor"       onkeydown="selecionaPorTecla(event,this);"  lookupTamanho="50"/>
 				</plcf:celula>
 				
-				<plcf:celula columnSpan="2">   
-					<plcf:titulo tituloChave="label.turma">Turma</plcf:titulo> 
-					<plcf:comboDinamico id="turma" obrigatorio="S" value="#{plcEntidade.turma}" dominio="TurmaEntity" exibeBranco="S"  propRotulo="descricao" />
-				</plcf:celula>
-			
 			</plcf:linha>
 		
 		<plcf:botaoAcao acao="setaEstoqueExistente" id="setaEstoqueExistente" inlineStyle="display:none" validaForm="false"/>
