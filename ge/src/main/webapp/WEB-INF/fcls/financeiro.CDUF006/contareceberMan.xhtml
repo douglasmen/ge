@@ -101,14 +101,13 @@
 			</plcf:linha> 
 		</plcf:tabela> 
 		
-		 	<plcf:botaoAcao id="arquivo" acao="exportar" validaForm="false" limpaForm="false"/>
+		 	<plcf:botaoAcao id="btRecuperaValor" acao="recuperarValorAluno" validaForm="false" limpaForm="false"/>
 		<script avaliar="S">
 
 		//<![CDATA[
 		
 			PlcGeral.prototype.aposDevolveSelecaoPopup = function() {
-				//document.getElementById("corpo:formulario:botaoValidacaoMunicipio").click();
-				alert('entro');
+				document.getElementById("corpo:formulario:btRecuperaValor").click();
 			}
 
 		 //]]>

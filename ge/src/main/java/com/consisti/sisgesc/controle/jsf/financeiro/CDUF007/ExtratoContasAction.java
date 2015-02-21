@@ -58,12 +58,11 @@ public class ExtratoContasAction extends AppAction  {
 		verificaArgumentoInformado(listaArgumentos);
 		
 		IAppFacade fc = (IAppFacade)getServiceFacade();
-		//listExtratoConta = fc.recuperaTodosExtratoContas();
 		Date dataInicio = retornaDataByDate( listaArgumentos.get(0).getValor() );
 		Date dataFim = retornaDataByDate( listaArgumentos.get(1).getValor() );
 		
-		listContaPagar = fc.recuperaContaPagar(dataInicio, dataFim);
-		listContaReceber = fc.recuperaContaReceber(dataInicio, dataFim);
+		listContaPagar = fc.recuperaContaPagarByExtrato(dataInicio, dataFim);
+		listContaReceber = fc.recuperaContaReceberByExtrato(dataInicio, dataFim);
 		totalContaPagar = new BigDecimal(0);
 		totalContaReceber = new BigDecimal(0);
 		

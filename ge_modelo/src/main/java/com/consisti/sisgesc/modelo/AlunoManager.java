@@ -171,6 +171,12 @@ public class AlunoManager extends AppManager {
 		return aluno;
 	}
 	
+	public AlunoEntity recuperarAlunoVOByServico( Long idAluno ) throws PlcException{
+		AlunoEntity aluno = (AlunoEntity) recuperaSomenteVO( AlunoEntity.class, idAluno );
+		Hibernate.initialize( aluno.getServicoAluno() );
+		return aluno;
+	}
+	
 	@Override
 	protected void recuperaListaApos(String orderyByDinamico, List argsQBE,
 			int primeiraLinha, int maximoLinhas, List lista)
