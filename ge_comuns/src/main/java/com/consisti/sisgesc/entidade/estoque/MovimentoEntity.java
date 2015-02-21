@@ -12,6 +12,8 @@ import javax.persistence.Transient;
 import com.powerlogic.jcompany.comuns.anotacao.PlcTabular;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.AccessType;
 import javax.persistence.Entity;
 import com.consisti.sisgesc.entidade.FornecedorEntity;
@@ -30,12 +32,12 @@ import com.consisti.sisgesc.entidade.TurmaEntity;
 @NamedQueries({
 	@NamedQuery(name="MovimentoEntity.querySel", query="select new MovimentoEntity(obj.id, obj.qtdeSaida, obj.valorUnitario, obj.dataMovimentacao, obj.valorTotal, obj.turma.id , obj.turma.descricao) from MovimentoEntity obj left outer join obj.turma left outer join obj.fornecedor order by obj.id asc"),
 	@NamedQuery(name="MovimentoEntity.queryMan", query="from MovimentoEntity obj"),
-	@NamedQuery(name="MovimentoEntity.querySel2", query="select new MovimentoEntity(obj.id, obj.qtdeEntrada, obj.dataMovimentacao, obj.valorUnitario, obj.valorTotal, obj.fornecedor.id , obj.fornecedor.nome, prod.id, prod.descricao) " +
+	@NamedQuery(name="MovimentoEntity.querySel2", query="select new MovimentoEntity(obj.id, obj.qtdeEntrada, obj.dataMovimentacao, obj.valorUnitario, obj.valorTotal, obj.fornecedor.id , obj.fornecedor.nome, prod.id, prod.descricao, obj.fornecedor.nomeFantasia, obj.fornecedor.razaoSocial) " +
 			                                           "from MovimentoEntity obj " +
 			                                           "left outer join obj.fornecedor " +
 			                                           "left outer join obj.estoque estoq " +
 			                                           "left outer join estoq.produtoMaterial prod " +
-			                                           "order by obj.id asc"),
+			                                           "order by obj.fornecedor.nome asc, obj.fornecedor.nomeFantasia asc, obj.dataMovimentacao desc "),
 	@NamedQuery(name="MovimentoEntity.querySelLookup", query="select new MovimentoEntity (obj.id, obj.observacao) from MovimentoEntity obj where obj.id = ? order by obj.id asc")
 })
 public class MovimentoEntity extends Movimento {
@@ -88,7 +90,7 @@ public class MovimentoEntity extends Movimento {
 		return NumberFormat.getCurrencyInstance().format(getValorTotal());
 	}
 
-	public MovimentoEntity(Long id, Long qtdeEntrada, Date dataMovimentacao, BigDecimal valorUnitario, BigDecimal valorTotal, Long fornecedorId, String fornecedorNome, Long idProduto, String descricaoProduto) {
+	public MovimentoEntity(Long id, Long qtdeEntrada, Date dataMovimentacao, BigDecimal valorUnitario, BigDecimal valorTotal, Long fornecedorId, String fornecedorNome, Long idProduto, String descricaoProduto, String nomeFantasia, String razaoSocial) {
 		setId(id);
 		setQtdeEntrada(qtdeEntrada);
 		setValorUnitario(valorUnitario);
@@ -98,7 +100,7 @@ public class MovimentoEntity extends Movimento {
 			setFornecedor(new FornecedorEntity());
 		}
 		getFornecedor().setId(fornecedorId);
-		getFornecedor().setNome(fornecedorNome);
+		getFornecedor().setNome( StringUtils.isNotBlank(fornecedorNome) ? fornecedorNome : StringUtils.isNotBlank(nomeFantasia) ? nomeFantasia : StringUtils.isNotBlank(razaoSocial) ? razaoSocial : "" );
 		setIdProduto(idProduto);
 		setDescricaoProduto(descricaoProduto);
 	}

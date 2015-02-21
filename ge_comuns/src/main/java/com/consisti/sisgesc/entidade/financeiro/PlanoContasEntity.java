@@ -23,7 +23,7 @@ import javax.persistence.Entity;
 @SuppressWarnings("serial")
 @NamedQueries({
 	@NamedQuery(name="PlanoContasEntity.queryMan", query="from PlanoContasEntity obj"),
-	@NamedQuery(name="PlanoContasEntity.querySelLookup", query="select new PlanoContasEntity (obj.id, obj.descricao) from PlanoContasEntity obj where obj.id = ? order by obj.id asc")
+	@NamedQuery(name="PlanoContasEntity.querySelLookup", query="select new PlanoContasEntity (obj.id, obj.descricao) from PlanoContasEntity obj where obj.id = ? order by obj.descricao asc")
 })
 public class PlanoContasEntity extends PlanoContas {
  	

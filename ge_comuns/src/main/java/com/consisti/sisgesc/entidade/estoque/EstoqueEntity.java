@@ -12,9 +12,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.AccessType;
 import javax.persistence.Entity;
 import com.consisti.sisgesc.dominio.Status;
+import com.consisti.sisgesc.dominio.TipoMovimentacao;
 import com.consisti.sisgesc.entidade.Fornecedor;
 import com.consisti.sisgesc.entidade.estoque.ProdutoMaterialEntity;
 /**
@@ -34,10 +36,16 @@ import com.consisti.sisgesc.entidade.estoque.ProdutoMaterialEntity;
 			                                                                   "obj.produtoMaterial.descricao," +
 			                                                                   "obj.dataCriacao," +
 			                                                                   "obj.valorTotalEstoque, " +
-			                                                                   "move.dataMovimentacao) " +
+			                                                                   "move.dataMovimentacao, " +
+			                                                                   "move.tipoMovimentacao, " +
+			                                                                   "move.qtdeEntrada, " +
+			                                                                   "move.qtdeSaida, " +
+			                                                                   "forn.nome, " +
+			                                                                   "forn.nomeFantasia) " +
 			                                                                   "from EstoqueEntity obj " +
 			                                                                   "left outer join obj.produtoMaterial " +
 			                                                                   "left outer join obj.movimento move " +
+			                                                                   "left outer join move.fornecedor forn " +
 			                                                                   "order by obj.produtoMaterial.descricao asc"),
 	@NamedQuery(name="EstoqueEntity.queryMan", query="from EstoqueEntity obj"),
 	@NamedQuery(name="EstoqueEntity.querySel", query="select new EstoqueEntity(obj.id, obj.produtoMaterial, obj.saldo, obj.dataCriacao, obj.status) from EstoqueEntity obj left outer join obj.movimento mov " +
@@ -90,6 +98,15 @@ public class EstoqueEntity extends Estoque {
 	
 	@Transient
 	private Long saldoTotalSomado;
+	@Transient
+	private Long qtdeEntrada;
+	@Transient
+	private Long qtdeSaida;
+	@Transient
+	private TipoMovimentacao tipoMovimentacao;
+	@Transient
+	private String nomeFornecedor;
+	
 	
     /*
      * Construtor padrão
@@ -132,7 +149,8 @@ public class EstoqueEntity extends Estoque {
 	}
 	
 	public EstoqueEntity(Long id, Long saldo, Status status, Long produtoMaterialId, String produtoMaterialDescricao, 
-		 	             Date dataCriacao, BigDecimal valorTotalEstoque, Date dataMovimentacao) {
+		 	             Date dataCriacao, BigDecimal valorTotalEstoque, Date dataMovimentacao, TipoMovimentacao tipoMovimentacao, Long qtdeEntrada, Long qtdeSaida,
+		 	             String nomeFornecedor, String nomeFantasia) {
 		setId(id);
 		setSaldo(saldo);
 		setStatus(status);
@@ -144,6 +162,10 @@ public class EstoqueEntity extends Estoque {
 		setDataCriacao(dataCriacao);
 		setValorTotalEstoque(valorTotalEstoque);
 		setDataMovimentacao(dataMovimentacao);
+		setTipoMovimentacao(tipoMovimentacao);
+		setQtdeEntrada(qtdeEntrada);
+		setQtdeSaida(qtdeSaida);
+		setNomeFornecedor( StringUtils.isNotBlank(nomeFornecedor) ? nomeFornecedor : nomeFantasia );
 	}
 	
 	public Long getIdMovimento() {
@@ -217,5 +239,29 @@ public class EstoqueEntity extends Estoque {
 	}
 	public void setSaldoTotalSomado(Long saldoTotalSomado) {
 		this.saldoTotalSomado = saldoTotalSomado;
+	}
+	public Long getQtdeEntrada() {
+		return qtdeEntrada;
+	}
+	public void setQtdeEntrada(Long qtdeEntrada) {
+		this.qtdeEntrada = qtdeEntrada;
+	}
+	public Long getQtdeSaida() {
+		return qtdeSaida;
+	}
+	public void setQtdeSaida(Long qtdeSaida) {
+		this.qtdeSaida = qtdeSaida;
+	}
+	public TipoMovimentacao getTipoMovimentacao() {
+		return tipoMovimentacao;
+	}
+	public void setTipoMovimentacao(TipoMovimentacao tipoMovimentacao) {
+		this.tipoMovimentacao = tipoMovimentacao;
+	}
+	public String getNomeFornecedor() {
+		return nomeFornecedor;
+	}
+	public void setNomeFornecedor(String nomeFornecedor) {
+		this.nomeFornecedor = nomeFornecedor;
 	}
 }

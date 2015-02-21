@@ -22,7 +22,8 @@ public enum BancoSuportado {
 	B422( "422 - BANCO SAFRA" ) /* bancoSuportado.B422=BANCO SAFRA */,
 	B453( "453 - BANCO RURAL" ) /* bancoSuportado.B453=BANCO RURAL */,
 	B748( "748 - BANCO SICREDI" ) /* bancoSuportado.B748=BANCO SICREDI */,
-	B756( "756 - BANCOOB" ) /* bancoSuportado.B756=BANCOOB */;
+	B756( "756 - BANCOOB" ) /* bancoSuportado.B756=BANCOOB */,
+	B900( "FLUXO DE CAIXA" ) /* bancoSuportado.B900=FLUXO DE CAIXA */;
 
 	private String descricao;
 	
