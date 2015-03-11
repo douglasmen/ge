@@ -23,7 +23,7 @@ import javax.persistence.Entity;
 @SuppressWarnings("serial")
 @NamedQueries({
 	@NamedQuery(name="TurmaEntity.queryMan", query="from TurmaEntity obj"),
-	@NamedQuery(name="TurmaEntity.querySelLookup", query="select new TurmaEntity (obj.id, obj.descricao) from TurmaEntity obj where obj.id = ? order by obj.id asc")
+	@NamedQuery(name="TurmaEntity.querySelLookup", query="select new TurmaEntity (obj.id, obj.descricao) from TurmaEntity obj where obj.id = ? order by obj.descricao asc")
 })
 public class TurmaEntity extends Turma {
  	

@@ -15,7 +15,7 @@
 			
 				<plcf:celula> 
 					<plcf:titulo tituloChave="label.fornecedor"/>  
-					<plcf:comboDinamico id="fornecedor" value="#{plcLogicaItens.argumentos.fornecedor.valor}" dominio="FornecedorEntity" exibeBranco="S" ajudaChave="ajuda.fornecedor"/> 
+					<plcf:vinculado id="fornecedor" value="#{plcLogicaItens.argumentos.favorecido.valor}" propSelPop="fornecedor" idExibe="N" idSomenteLeitura="N" autoRecuperacaoClasse="com.consisti.sisgesc.entidade.FornecedorEntity" actionSel="fornecedorsel" modal="S" ajudaChave="ajuda.favorecido" onkeydown="selecionaPorTecla(event,this);" lookupTamanho="50"/> 
 				</plcf:celula> 
 			
 			</plcf:linha> 	

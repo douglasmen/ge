@@ -52,12 +52,11 @@ import com.consisti.sisgesc.modelo.AlunoManager;
 import com.consisti.sisgesc.modelo.BoletimFundamentalManager;
 import com.consisti.sisgesc.modelo.ContaReceberManager;
 import com.consisti.sisgesc.modelo.ContratoManager;
+import com.consisti.sisgesc.modelo.ExtratoContasManager;
 import com.consisti.sisgesc.modelo.RegistroNotasFundamentalManager;
 import com.consisti.sisgesc.modelo.ServicoAlunoManager;
 import com.consisti.sisgesc.persistencia.hibernate.AlunoDAO;
 import com.consisti.sisgesc.persistencia.hibernate.BancoDAO;
-import com.consisti.sisgesc.persistencia.hibernate.ContaPagarDAO;
-import com.consisti.sisgesc.persistencia.hibernate.ContaReceberDAO;
 import com.consisti.sisgesc.persistencia.hibernate.ContratoDAO;
 import com.consisti.sisgesc.persistencia.hibernate.CronogramaTurmaDAO;
 import com.consisti.sisgesc.persistencia.hibernate.CronogramaTurmaDisciplinaDAO;
@@ -212,16 +211,16 @@ public class AppFacadeImpl extends PlcFacadeImpl implements IAppFacade, IAppFaca
 		return dao.recuperaResponsavelFinanceiroAluno(idAluno);
 	}
 
-	public List<ContaPagar> recuperaContaPagar(Date dataInicio, Date dataFim)
+	public List<ContaPagar> recuperaContaPagarByExtrato(Date dataInicio, Date dataFim)
 			throws PlcException {
-		ContaPagarDAO dao = (ContaPagarDAO)getDAO(ContaPagarDAO.class);
-		return dao.recuperarAllContaPagar(dataInicio, dataFim);
+		ExtratoContasManager bo = (ExtratoContasManager)getBO(ExtratoContasManager.class);
+		return bo.recuperaContaPagar(dataInicio, dataFim);
 	}
 
-	public List<ContaReceber> recuperaContaReceber(Date dataInicio, Date dataFim)
+	public List<ContaReceber> recuperaContaReceberByExtrato(Date dataInicio, Date dataFim)
 			throws PlcException {
-		ContaReceberDAO dao = (ContaReceberDAO)getDAO(ContaReceberDAO.class);
-		return dao.recuperarAllContaReceber(dataInicio, dataFim);
+		ExtratoContasManager bo = (ExtratoContasManager)getBO(ExtratoContasManager.class);
+		return bo.recuperaContaReceber(dataInicio, dataFim);
 	}
 
 	public List<BancoEntity> recuperaListaBanco() throws PlcException {
@@ -238,5 +237,11 @@ public class AppFacadeImpl extends PlcFacadeImpl implements IAppFacade, IAppFaca
 			throws PlcException {
 		ContaReceberManager bo = (ContaReceberManager)getBO(ContaReceberManager.class);
 		bo.gravarContaReceberPorDemanda(listaVO);
+	}
+
+	public AlunoEntity recuperarAlunoVOByServico(Long idAluno)
+			throws PlcException {
+		AlunoManager bo = (AlunoManager)getBO(AlunoManager.class);
+		return bo.recuperarAlunoVOByServico(idAluno);
 	}
 }

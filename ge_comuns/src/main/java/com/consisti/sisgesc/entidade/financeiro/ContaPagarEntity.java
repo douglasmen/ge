@@ -25,7 +25,7 @@ import com.powerlogic.jcompany.dominio.tipo.PlcSimNao;
 @SuppressWarnings("serial")
 @NamedQueries({
 	@NamedQuery(name="ContaPagarEntity.queryMan", query="from ContaPagarEntity obj"),
-	@NamedQuery(name="ContaPagarEntity.querySel", query="select new ContaPagarEntity(obj.id, obj.favorecido.id , obj.favorecido.nome, obj.planoContas.id , obj.planoContas.descricao, obj.formaPagamento.id , obj.formaPagamento.descricao, obj.dataVencimento, obj.dataInclusao, obj.valorPagar, obj.numeroDocumento, obj.contaPaga) from ContaPagarEntity obj left outer join obj.favorecido left outer join obj.planoContas left outer join obj.formaPagamento order by obj.id asc"),
+	@NamedQuery(name="ContaPagarEntity.querySel", query="select new ContaPagarEntity(obj.id, obj.favorecido.id , obj.favorecido.nome, obj.planoContas.id , obj.planoContas.descricao, obj.formaPagamento.id , obj.formaPagamento.descricao, obj.dataVencimento, obj.dataInclusao, obj.valorPagar, obj.numeroDocumento, obj.contaPaga, obj.favorecido.nomeFantasia, obj.favorecido.razaoSocial) from ContaPagarEntity obj left outer join obj.favorecido left outer join obj.planoContas left outer join obj.formaPagamento order by obj.favorecido.nome asc, obj.favorecido.nomeFantasia asc, obj.favorecido.razaoSocial asc, obj.planoContas.descricao asc, obj.dataVencimento desc"),
 	@NamedQuery(name="ContaPagarEntity.querySelLookup", query="select new ContaPagarEntity (obj.id, obj.favorecido) from ContaPagarEntity obj where obj.id = ? order by obj.id asc")
 })
 public class ContaPagarEntity extends ContaPagar {
@@ -72,13 +72,15 @@ public class ContaPagarEntity extends ContaPagar {
 		return new Class[] {com.consisti.sisgesc.entidade.Fornecedor.class,com.consisti.sisgesc.entidade.financeiro.PlanoContas.class,com.consisti.sisgesc.entidade.financeiro.FormaPagamento.class};
 	}
 
-	public ContaPagarEntity(Long id, Long favorecidoId, String favorecidoNome, Long planoContasId, String planoContasDescricao, Long formaPagamentoId, String formaPagamentoDescricao, java.util.Date dataVencimento, java.util.Date dataInclusao, java.math.BigDecimal valorPagar, Long numeroDocumento, PlcSimNao contaPaga) {
+	public ContaPagarEntity(Long id, Long favorecidoId, String favorecidoNome, Long planoContasId, String planoContasDescricao, Long formaPagamentoId, String formaPagamentoDescricao, java.util.Date dataVencimento, java.util.Date dataInclusao, java.math.BigDecimal valorPagar, Long numeroDocumento, PlcSimNao contaPaga, String nomeFantasia, String razaoSocial) {
 		setId(id);
 		if (getFavorecido() == null){
 			setFavorecido(new FornecedorEntity());
 		}
 		getFavorecido().setId(favorecidoId);
 		getFavorecido().setNome(favorecidoNome);
+		getFavorecido().setNomeFantasia(nomeFantasia);
+		getFavorecido().setRazaoSocial(razaoSocial);
 		if (getPlanoContas() == null){
 			setPlanoContas(new PlanoContasEntity());
 		}

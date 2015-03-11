@@ -8,6 +8,8 @@ import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.BoletoViewer;
 
 import com.consisti.sisgesc.controle.jsf.AppAction;
+import com.consisti.sisgesc.entidade.AlunoEntity;
+import com.consisti.sisgesc.entidade.ServicoAluno;
 import com.consisti.sisgesc.entidade.financeiro.ContaReceberEntity;
 import com.consisti.sisgesc.facade.IAppFacade;
 import com.powerlogic.jcompany.comuns.PlcException;
@@ -173,5 +175,22 @@ public class ContaReceberAction extends AppAction  {
 			throw new PlcException("msg.info.informar.banco");
 		}
 	}
-	
+	public String recuperarValorAluno() throws PlcException{
+		
+		ContaReceberEntity contaReceber = (ContaReceberEntity)entidadePlc;
+		if(contaReceber.getAluno() != null ){
+			IAppFacade fc = (IAppFacade)getServiceFacade();
+			AlunoEntity aluno = fc.recuperarAlunoVOByServico( contaReceber.getAluno().getId() );
+			
+			contaReceber.setValorDocumento( aluno.getValorTotalMensalidade() );
+			
+			if( aluno.getServicoAluno() != null && !aluno.getServicoAluno().isEmpty() ){
+				for (ServicoAluno servico : aluno.getServicoAluno()) {
+					contaReceber.setValorDocumento( contaReceber.getValorDocumento().add( servico.getServico().getValorServico() ) ); 
+				}
+			}
+		}
+		
+		return NAVEGACAO.IND_MESMA_PAGINA;
+	}
 }

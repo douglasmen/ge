@@ -227,9 +227,9 @@ public interface IAppFacade extends IPlcFacade {
 	 */
 	ResponsavelFinanceiroAlunoEntity recuperaResponsavelFinanceiroAluno( Long idAluno ) throws PlcException;
 
-	List<ContaPagar> recuperaContaPagar(Date dataInicio, Date dataFim) throws PlcException;
+	List<ContaPagar> recuperaContaPagarByExtrato(Date dataInicio, Date dataFim) throws PlcException;
 
-	List<ContaReceber> recuperaContaReceber(Date dataInicio, Date dataFim) throws PlcException;
+	List<ContaReceber> recuperaContaReceberByExtrato(Date dataInicio, Date dataFim) throws PlcException;
 	
 	/**
 	 * Utilizado para gravar o contas a reber por demanda
@@ -246,4 +246,6 @@ public interface IAppFacade extends IPlcFacade {
 	List<BancoEntity> recuperaListaBanco() throws PlcException;
 
 	void excluirServicoAluno(Long id) throws PlcException;
+	
+	AlunoEntity recuperarAlunoVOByServico( Long idAluno ) throws PlcException;
 }

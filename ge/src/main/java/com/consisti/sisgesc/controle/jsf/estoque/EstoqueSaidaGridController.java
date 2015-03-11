@@ -23,8 +23,8 @@ import com.powerlogic.jcompany.controle.rest.controles.PlcBaseGridControle;
 
 @SPlcControle
 @QPlcControleNome("grid")
-@QPlcControleQualificador("estoqueentradasel")
-public class EstoqueEntradaGridController extends PlcBaseGridControle {
+@QPlcControleQualificador("estoquesaidasel")
+public class EstoqueSaidaGridController extends PlcBaseGridControle {
 
 	@Inject @QPlcAtual
 	protected PlcConfigGrupoControle configGrupoControle;
@@ -49,7 +49,7 @@ public class EstoqueEntradaGridController extends PlcBaseGridControle {
 			
 			PlcArgVO arg = new PlcArgVO();
 			arg.setNome("tipoMovimentacao");
-			arg.setValor(TipoMovimentacao.E.name());
+			arg.setValor(TipoMovimentacao.S.name());
 			arg.setTipo(Formato.STRING.name());
 			arg.setOperador(Operador.IGUAL_A.toString());
 			arg.setTipo(PlcConstantesComuns.CONSULTA.QBE.QBE_TIPO_ARGUMENTO);

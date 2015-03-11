@@ -6,7 +6,8 @@ package com.consisti.sisgesc.dominio;
 public enum TipoConta {
     
 	C("CONTA CORRENTE") /* tipoConta.C=Conta corrente */,
-	P("POUPANÇA") /* tipoConta.P=Poupança */;
+	P("POUPANÇA") /* tipoConta.P=Poupança */,
+	D("DINHEIRO") /* tipoConta.D=DINHEIRO */;
 
 	private String descricao;
 	

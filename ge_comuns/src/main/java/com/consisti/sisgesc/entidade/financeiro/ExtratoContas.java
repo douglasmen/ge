@@ -3,7 +3,10 @@ package com.consisti.sisgesc.entidade.financeiro;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ExtratoContas {
+import com.consisti.sisgesc.entidade.AppBaseEntity;
+
+@SuppressWarnings("serial")
+public class ExtratoContas extends AppBaseEntity{
 	
 	private ContaPagar contaPagar;
 	private ContaReceber contaReceber;
