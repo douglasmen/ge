@@ -238,10 +238,13 @@ public class AppFacadeImpl extends PlcFacadeImpl implements IAppFacade, IAppFaca
 		ContaReceberManager bo = (ContaReceberManager)getBO(ContaReceberManager.class);
 		bo.gravarContaReceberPorDemanda(listaVO);
 	}
-
 	public AlunoEntity recuperarAlunoVOByServico(Long idAluno)
 			throws PlcException {
 		AlunoManager bo = (AlunoManager)getBO(AlunoManager.class);
 		return bo.recuperarAlunoVOByServico(idAluno);
+	}
+	public ContratoEntity recuperaUltimoContratoAluno(Long idAluno) throws PlcException {
+		ContratoDAO dao = (ContratoDAO)getDAO(ContratoDAO.class);
+		return dao.recuperaContratoAluno(idAluno);
 	}
 }
