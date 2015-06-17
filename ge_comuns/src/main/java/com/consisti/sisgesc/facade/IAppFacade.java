@@ -248,7 +248,6 @@ public interface IAppFacade extends IPlcFacade {
 	void excluirServicoAluno(Long id) throws PlcException;
 	
 	AlunoEntity recuperarAlunoVOByServico( Long idAluno ) throws PlcException;
-
 	/**
 	 * Recupera o ultimo contrato ativo do aluno
 	 * @param id
