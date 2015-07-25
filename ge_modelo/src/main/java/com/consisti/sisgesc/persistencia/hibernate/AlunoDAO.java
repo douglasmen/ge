@@ -3,15 +3,14 @@ package com.consisti.sisgesc.persistencia.hibernate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanComparator;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 
+import com.consisti.sisgesc.dominio.AtivoInativo;
 import com.consisti.sisgesc.dominio.TipoEducacao;
 import com.consisti.sisgesc.entidade.AlunoEntity;
 import com.consisti.sisgesc.entidade.Contrato;
@@ -87,6 +86,7 @@ private ResponsavelFinanceiroAlunoDAO responsavelFinanceiroAlunoDAO;
 	 * @return
 	 * @throws PlcException
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoEntity> recuperaDadosPorTurma(Long idTurma)throws PlcException {
 		
 		String hql = "";
@@ -94,8 +94,8 @@ private ResponsavelFinanceiroAlunoDAO responsavelFinanceiroAlunoDAO;
 		
 		if (idTurma==null){
 			hql = " from AlunoEntity aluno " +
-			"";
-			List<AlunoEntity> list = getSession().createQuery(hql.toString()).list();
+			"where aluno.status = :ATIVO";
+			List<AlunoEntity> list = getSession().createQuery(hql.toString()).setParameter("ATIVO", AtivoInativo.A).list();
 			Collections.sort(list, new BeanComparator("turma.descricao"));
 			it = list.iterator();
 		} else {
@@ -103,8 +103,9 @@ private ResponsavelFinanceiroAlunoDAO responsavelFinanceiroAlunoDAO;
 			"left outer join aluno.turma tur " +
 			"left outer join aluno.contrato contr " +
 			"where tur.id =:idTurma " +
+			"and aluno.status = :ATIVO " +
 			"order by aluno.nomeAluno asc ";
-			it = getSession().createQuery( hql.toString() ).setLong( "idTurma", idTurma ).iterate();
+			it = getSession().createQuery( hql.toString() ).setLong( "idTurma", idTurma ).setParameter("ATIVO", AtivoInativo.A).iterate();
 		}
 		
 		if (it!=null){
