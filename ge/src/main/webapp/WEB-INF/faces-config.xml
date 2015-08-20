@@ -481,37 +481,6 @@
 		<to-view-id>/n/cadastroferiadotab</to-view-id> 
 	</navigation-case> 
 </navigation-rule>
-	<navigation-rule> 
-	<display-name>Manutencao Calendário anual</display-name>  
-	<from-view-id>/n/calendarioanualmdt</from-view-id>  
-	<navigation-case> 
-		<from-outcome>mesmaPagina</from-outcome>  
-		<to-view-id>/n/calendarioanualmdt</to-view-id> 
-	</navigation-case>  
-	<navigation-case> 
-		<from-outcome>abre</from-outcome>  
-		<to-view-id>/n/calendarioanualsel</to-view-id>  
-		<redirect/> 
-	</navigation-case> 
-</navigation-rule>
-	<navigation-rule> 
-	<display-name>Seleção Calendário anual</display-name>  
-	<from-view-id>/n/calendarioanualsel</from-view-id>  
-	<navigation-case> 
-		<from-outcome>mesmaPagina</from-outcome>  
-		<to-view-id>/n/calendarioanualsel</to-view-id> 
-	</navigation-case>  
-	<navigation-case> 
-		<from-outcome>edita</from-outcome>  
-		<to-view-id>/n/calendarioanualmdt</to-view-id>  
-		<redirect/> 
-	</navigation-case>  
-	<navigation-case> 
-		<from-outcome>novo</from-outcome>  
-		<to-view-id>/n/calendarioanualmdt</to-view-id>  
-		<redirect/> 
-	</navigation-case> 
-</navigation-rule>
 <navigation-rule> 
 	<display-name>Manutencao for</display-name>  
 	<from-view-id>/n/fornecedorman</from-view-id>  

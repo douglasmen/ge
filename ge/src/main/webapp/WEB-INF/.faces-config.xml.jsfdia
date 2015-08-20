@@ -390,33 +390,6 @@
     TARGET="rules:#n#cadastroferiadotab" TITLE="mesmaPagina" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#n#calendarioanualmdt"
-  PATH="/n/calendarioanualmdt" SHAPE="288,2753,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#n#calendarioanualmdt:0" NAME="item"
-   PATH="/n/calendarioanualmdt" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="mesmaPagina::#n#calendarioanualmdt"
-    NAME="output" PATH="/n/calendarioanualmdt"
-    TARGET="rules:#n#calendarioanualmdt" TITLE="mesmaPagina" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="abre::#n#calendarioanualsel" NAME="output1"
-    PATH="/n/calendarioanualsel" TARGET="rules:#n#calendarioanualsel"
-    TITLE="abre" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#n#calendarioanualsel"
-  PATH="/n/calendarioanualsel" SHAPE="48,2737,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#n#calendarioanualsel:0" NAME="item"
-   PATH="/n/calendarioanualsel" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="mesmaPagina::#n#calendarioanualsel"
-    NAME="output" PATH="/n/calendarioanualsel"
-    TARGET="rules:#n#calendarioanualsel" TITLE="mesmaPagina" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="edita::#n#calendarioanualmdt" NAME="output1"
-    PATH="/n/calendarioanualmdt" TARGET="rules:#n#calendarioanualmdt"
-    TITLE="edita" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="novo::#n#calendarioanualmdt" NAME="output2"
-    PATH="/n/calendarioanualmdt" TARGET="rules:#n#calendarioanualmdt"
-    TITLE="novo" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#n#fornecedorman" PATH="/n/fornecedorman"
   SHAPE="288,2929,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#n#fornecedorman:0" NAME="item"
@@ -826,4 +799,13 @@
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#n#mensalidadesturmasel"
   PATH="/n/mensalidadesturmasel" SHAPE="256,7889,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#n#diatipotab" PATH="/n/diatipotab"
+  SHAPE="32,10369,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#n#diatipotab:0" NAME="item"
+   PATH="/n/diatipotab" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="mesmaPagina::#n#diatipotab" NAME="output"
+    PATH="/n/diatipotab" TARGET="rules:#n#diatipotab"
+    TITLE="mesmaPagina" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>
