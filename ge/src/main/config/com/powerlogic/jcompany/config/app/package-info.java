@@ -59,7 +59,8 @@
 		com.consisti.sisgesc.entidade.financeiro.PlanoContasEntity.class,
 		com.consisti.sisgesc.entidade.ConteudoEntity.class,
 		com.consisti.sisgesc.entidade.DisciplinasEntity.class,
-		com.consisti.sisgesc.entidade.TurmaEntity.class}
+		com.consisti.sisgesc.entidade.TurmaEntity.class,
+		com.consisti.sisgesc.entidade.DiaTipoEntity.class}
 )
 
 @PlcConfigOtimizacao(javascriptEspecificoUsa=true, cssEspecificoUsa=true)

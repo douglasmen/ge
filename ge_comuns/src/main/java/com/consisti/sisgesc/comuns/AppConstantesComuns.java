@@ -30,6 +30,8 @@ public interface AppConstantesComuns extends PlcConstantesComuns {
     
     int DIAS_PARA_GERAR_HISTORICO = 365;
     
+    String COR_EM_BRANCO = "#ffffff";
+    
     interface RELATORIO{
     	
     	String REL_MENSALIDADES_TURMA = "mensalidades_turma.jasper";

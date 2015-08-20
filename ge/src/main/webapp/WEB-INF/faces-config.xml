@@ -13,6 +13,16 @@
  		<to-view-id>/fcls/public/loginDesconectaPlc.xhtml</to-view-id>
  	</navigation-case>
  </navigation-rule>
+
+<navigation-rule> 
+	<display-name>Manutencao Cadastrar dia</display-name>  
+	<from-view-id>/n/diatipotab</from-view-id>  
+	<navigation-case> 
+		<from-outcome>mesmaPagina</from-outcome>  
+		<to-view-id>/n/diatipotab</to-view-id> 
+	</navigation-case> 
+</navigation-rule>
+
  	<navigation-rule> 
 	<display-name>Manutencao Cadastrar Turma</display-name>  
 	<from-view-id>/n/turmatab</from-view-id>  

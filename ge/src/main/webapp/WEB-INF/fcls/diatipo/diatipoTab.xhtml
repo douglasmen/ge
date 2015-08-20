@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+	
+		<plcf:tabela tituloChave="diatipo.titulo">
+			<plcf:linha> 
+				<plcf:celula/>  
+				<plcf:celula rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+					<plcf:tituloExclusao>Exc.</plcf:tituloExclusao> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.descricaoDia"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.cor"/> 
+				</plcf:celula> 
+			</plcf:linha>
+			<plcf:iteracao id="plcLogicaItens" value="#{plcLogicaItens.itensPlc}" varStatus="loop"> 
+				<plcf:linha> 
+					<plcf:celula> 
+						#{loop.index+1} 
+					</plcf:celula>  
+					<plcf:celula styleClass="celulaFormularioCaixaMarcacao" rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+						<plcf:caixaExclusao id="indExcPlc"/> 
+					</plcf:celula>  
+					<plcf:celula> 
+						<plcf:texto id="descricaoDia" value="#{item.descricaoDia}" ajudaChave="ajuda.descricaoDia"/> 
+					</plcf:celula>  
+					<plcf:celula> 
+						<input id="cor" value="#{item.cor == null ? '#ffffff' : item.cor}" type="color" onchange="selecionaCor(this.value, #{loop.index})"/>
+						<plcf:escondido id="corHtml" value="#{item.cor}" obrigatorio="S"/>
+					</plcf:celula> 
+				</plcf:linha> 
+			</plcf:iteracao>
+		</plcf:tabela>
+		
+		<script>
+			function selecionaCor(value, index){
+				document.getElementById('corpo:formulario:plcLogicaItens:'+index+':corHtml').value=value;
+			}
+		</script>
+		
+	</ui:composition> 
+</html>
