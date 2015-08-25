@@ -152,4 +152,13 @@ private ResponsavelFinanceiroAlunoDAO responsavelFinanceiroAlunoDAO;
 		
 	}
 	
+	public AlunoEntity recuperaValorMensalidadeAluno(Long idAluno) throws PlcException {
+		
+		StringBuffer hql = new StringBuffer(); 
+		hql.append( " SELECT new AlunoEntity (obj.valorTotalMensalidade) " );
+		hql.append(	" FROM AlunoEntity obj " );
+		hql.append(	" WHERE obj.id =:idAluno " ); 
+		
+		return (AlunoEntity)getSession().createQuery(hql.toString()).setLong("idAluno", idAluno).uniqueResult();
+	}
 }

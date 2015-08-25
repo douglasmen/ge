@@ -258,4 +258,11 @@ public interface IAppFacade extends IPlcFacade {
 	
 	List<AlunoEntity> recuperaDadosPorTurma(Long idTurma) throws PlcException;
 	
+	/**
+	 * Recupera os valore do aluno
+	 * @param contaReceber
+	 * @throws PlcException
+	 */
+	ContaReceberEntity recuperaValorAlunoSetContaReceber(Long idAluno) throws PlcException;
+	
 }

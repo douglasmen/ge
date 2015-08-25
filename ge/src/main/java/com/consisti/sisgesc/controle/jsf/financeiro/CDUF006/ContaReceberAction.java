@@ -8,8 +8,6 @@ import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.BoletoViewer;
 
 import com.consisti.sisgesc.controle.jsf.AppAction;
-import com.consisti.sisgesc.entidade.AlunoEntity;
-import com.consisti.sisgesc.entidade.ServicoAluno;
 import com.consisti.sisgesc.entidade.financeiro.ContaReceberEntity;
 import com.consisti.sisgesc.facade.IAppFacade;
 import com.powerlogic.jcompany.comuns.PlcException;
@@ -31,16 +29,16 @@ public class ContaReceberAction extends AppAction  {
 	@Override
 	protected void trataBotoesConformeLogicaApos() throws PlcException {
 		
+		super.trataBotoesConformeLogicaApos();
 		trataBotoes();
 		
-		super.trataBotoesConformeLogicaApos();
 	}
 
 	private void trataBotoes() {
 		
 		if( entidadePlc != null && entidadePlc.getId() != null ){
 			
-			contextHelperPlc.getRequest().setAttribute("exibeGeraBoleto", "S");
+			//contextHelperPlc.getRequest().setAttribute("exibeGeraBoleto", "S");
 			contextHelperPlc.getRequest().setAttribute("exibeLiquidaTitulo", "S");
 			//Se o titulo estiver quitado
 			if( PlcSimNao.S.equals( ((ContaReceberEntity)entidadePlc ).getRecebido() ) ){
@@ -52,6 +50,11 @@ public class ContaReceberAction extends AppAction  {
 			else{
 				contextHelperPlc.getRequest().setAttribute("exibeLiquidaTitulo", "S");
 			}
+		}
+		contextHelperPlc.getRequest().setAttribute( PlcConstantes.ACAO.EXIBE_BT_IMPRIMIR, "S");
+		
+		if(contextHelperPlc.getSessionAttribute("vinculadoAluno") == null){
+			contextHelperPlc.setSessionAttribute("vinculadoAluno", "S");
 		}
 	}
 	
@@ -65,7 +68,7 @@ public class ContaReceberAction extends AppAction  {
 		contaReceber.setDataDocumento( new Date() );
 		contaReceber.setRecebido( PlcSimNao.N);
 		contaReceber.setBoletoGerado( PlcSimNao.N);
-		
+		contextHelperPlc.setSessionAttribute("vinculadoAluno", "S");
 		return super.novoApos();
 	}
 	
@@ -83,6 +86,15 @@ public class ContaReceberAction extends AppAction  {
 		}
 		
 		return super.gravaSimplesAntes();
+	}
+	
+	@Override
+	protected String editaApos() throws PlcException {
+		contextHelperPlc.setSessionAttribute("vinculadoAluno", "S");
+		
+		ContaReceberEntity contaReceber = (ContaReceberEntity)entidadePlc;
+		
+		return super.editaApos();
 	}
 	
 	/**
@@ -175,22 +187,43 @@ public class ContaReceberAction extends AppAction  {
 			throw new PlcException("msg.info.informar.banco");
 		}
 	}
-	public String recuperarValorAluno() throws PlcException{
+	
+	public String recuperaValorALuno() throws PlcException{
 		
-		ContaReceberEntity contaReceber = (ContaReceberEntity)entidadePlc;
-		if(contaReceber.getAluno() != null ){
-			IAppFacade fc = (IAppFacade)getServiceFacade();
-			AlunoEntity aluno = fc.recuperarAlunoVOByServico( contaReceber.getAluno().getId() );
+		if( "S".equals( contextHelperPlc.getSessionAttribute("vinculadoAluno") )){
+		
+			ContaReceberEntity contaReceber = ( ContaReceberEntity )entidadePlc;
 			
-			contaReceber.setValorDocumento( aluno.getValorTotalMensalidade() );
-			
-			if( aluno.getServicoAluno() != null && !aluno.getServicoAluno().isEmpty() ){
-				for (ServicoAluno servico : aluno.getServicoAluno()) {
-					contaReceber.setValorDocumento( contaReceber.getValorDocumento().add( servico.getServico().getValorServico() ) ); 
-				}
+			if(contaReceber.getAluno() != null){
+				IAppFacade fc = (IAppFacade)getServiceFacade();
+				ContaReceberEntity receber = fc.recuperaValorAlunoSetContaReceber(contaReceber.getAluno().getId());
+				
+				contaReceber.setValorDocumento( receber.getValorDocumento() );
+				contaReceber.setValorTotal( receber.getValorDocumento() );
 			}
 		}
+		contextHelperPlc.setSessionAttribute("vinculadoAluno", "S");
 		
 		return NAVEGACAO.IND_MESMA_PAGINA;
 	}
+	
+	public String calcularTotal(){
+	
+		ContaReceberEntity contaReceber = (ContaReceberEntity)entidadePlc;
+		if( contaReceber.getValorDocumento() != null ){
+			if( contaReceber.getDescontoValor() != null ){
+				contaReceber.setValorTotal( contaReceber.getValorTotal().subtract( contaReceber.getDescontoValor() ) );
+			}
+			else if( contaReceber.getJuroValor() != null ){
+				contaReceber.setValorTotal( contaReceber.getValorTotal().add( contaReceber.getJuroValor() ) );
+			}
+			else{
+				contaReceber.setValorTotal( contaReceber.getValorDocumento() );
+			}
+		}
+		
+		
+		return NAVEGACAO.IND_MESMA_PAGINA;
+	}
+	
 }
