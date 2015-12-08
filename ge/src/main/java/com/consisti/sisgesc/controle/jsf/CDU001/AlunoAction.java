@@ -15,6 +15,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 import javax.faces.event.ValueChangeEvent;
@@ -46,6 +47,7 @@ import com.consisti.sisgesc.entidade.ServicoAluno;
 import com.consisti.sisgesc.entidade.ServicoAlunoEntity;
 import com.consisti.sisgesc.entidade.TurmaEntity;
 import com.consisti.sisgesc.facade.IAppFacade;
+import com.powerlogic.jcompany.comuns.PlcArgVO;
 import com.powerlogic.jcompany.comuns.PlcException;
 import com.powerlogic.jcompany.config.comuns.PlcConstantes;
 import com.powerlogic.jcompany.config.comuns.PlcConstantes.PlcJsfConstantes.NAVEGACAO;
@@ -80,6 +82,20 @@ public class AlunoAction extends RelatorioActionPlc  {
 		setDataCadastro( aluno );
 		aluno.setStatus(AtivoInativo.A);
 		return super.novoApos();
+	}
+	
+	@Override
+	protected Map<String, PlcArgVO> montaMapaArgumentosApos(
+			Map<String, PlcArgVO> argumentos) throws PlcException {
+		
+		if(  "S".equals( contextHelperPlc.getRequest().getParameter("popup") ) ){
+				PlcArgVO plcArgVO = argumentos.get("status");
+				plcArgVO.setValor("A");
+				plcArgVO.setValorObjeto(AtivoInativo.A);
+				argumentos.put("staus", plcArgVO);
+		}
+			
+		return super.montaMapaArgumentosApos(argumentos);
 	}
 	
 	@SuppressWarnings("deprecation")

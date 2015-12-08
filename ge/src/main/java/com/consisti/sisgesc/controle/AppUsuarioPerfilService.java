@@ -58,7 +58,7 @@ public class AppUsuarioPerfilService extends PlcBaseUsuarioPerfilService {
 		 * */
 		AppUsuarioPerfilVO appUsuarioPerfilVO = (AppUsuarioPerfilVO) plcPerfilVO;
 		
-	/*	PerfilEntity  perfil = facade.recuperaPerfilUsuarioByLoginUsuario( plcPerfilVO.getLogin() );
+		PerfilEntity  perfil = facade.recuperaPerfilUsuarioByLoginUsuario( plcPerfilVO.getLogin() );
 		UsuarioEntity usuario = facade.recuperaUsuarioByLogin( plcPerfilVO.getLogin() );
 		
 		if( perfil != null && usuario != null){
@@ -85,7 +85,7 @@ public class AppUsuarioPerfilService extends PlcBaseUsuarioPerfilService {
 		else{
 			return null;
 		}
-*/
+
 		return appUsuarioPerfilVO;
 
 		}

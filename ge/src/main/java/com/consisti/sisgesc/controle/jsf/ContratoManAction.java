@@ -31,7 +31,7 @@ public class ContratoManAction extends AditivoAction  {
 	protected void trataBotoesConformeLogicaApos() throws PlcException {
 		super.trataBotoesConformeLogicaApos();
 		//contextHelperPlc.getRequest().setAttribute("exibeIncluirPlc", PlcSimNao.N);
-		contextHelperPlc.getRequest().setAttribute("exibeExcluirPlc", PlcSimNao.N);
+		contextHelperPlc.getRequest().setAttribute("exibeExcluirPlc", PlcSimNao.S);
 		contextHelperPlc.getRequest().setAttribute("exibeGravarPlc", PlcSimNao.N);
 		serviceVisaoPlc.naoExibirAbaTabFolderPos(contextHelperPlc.getRequest(), 1);
 		
